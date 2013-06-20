@@ -1,0 +1,110 @@
+#citymenu {
+	margin: 5px 0 0 0;
+	position: absolute;
+	width: 90px;
+	top: 0px;
+	right: 0px;
+	-apple-dashboard-region:dashboard-region(control rectangle 0px 0px 0px 0px);
+}
+
+#citymenu a {
+	display: block;
+	width: 41px;
+	height: 28px;
+	float: left;
+	cursor: pointer;
+	margin: 0 1px 0 1px;
+}
+
+#city .info {
+	position: absolute;
+	left: 5px;
+	top: 190px;
+}
+
+#citymenu .r {
+	background: url(../img/button_r.png);
+}
+
+#citymenu .c {
+	background: url(../img/button_c.png);
+}
+
+#citymenu .i {
+	background: url(../img/button_i.png);
+}
+
+#citymenu .pd {
+	background: url(../img/button_pd.png);
+}
+
+#citymenu .fd {
+	background: url(../img/button_fd.png);
+}
+
+#citymenu .co {
+	background: url(../img/button_co.png);
+}
+
+#citymenu .nu {
+	background: url(../img/button_nu.png);
+}
+
+#citymenu .w {
+	background: url(../img/button_w.png);
+}
+
+#citymenu .ro {
+	background: url(../img/button_ro.png);
+}
+
+#citymenu .b {
+	background: url(../img/button_b.png);
+}
+
+#citymenu .menu {
+	width: 85px;
+	height: 22px;
+	background: url(../img/button_menu.png);
+}
+
+#citymenu .navi {
+	position: absolute;
+	height: 85px;
+	width: 68px;
+	background: url(../img/scrollerbg.png);
+	right: 15px;
+	top: 170px;
+}
+
+#citymenu .navi a {
+	position: absolute;
+	background: transparent;
+	display: block;
+	width: 23px;
+	height: 22px;
+}
+
+.navi .up {
+	left: 22px;
+	top: 2px;
+}
+
+.navi a {
+	cursor: pointer;
+}
+
+.navi .left {
+	left: 2px;
+	top: 23px;
+}
+
+.navi .right {
+	left: 40px;
+	top: 23px;
+}
+
+.navi .down {
+	left: 22px;
+	top: 43px;
+}

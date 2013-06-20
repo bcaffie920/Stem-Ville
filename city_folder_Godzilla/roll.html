@@ -1,0 +1,94 @@
+<html>
+<head>
+
+<style type="text/css">
+
+#marqueecontainer{
+padding: 0;
+margin: 0;
+position: fixed;
+width: 100%; /*marquee width */
+height: 100%; /*marquee height */
+background-color: black;
+overflow: hidden;
+}
+
+</style>
+
+<script type="text/javascript">
+
+/***********************************************
+* Cross browser Marquee II- © Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+var delayb4scroll=1000 //Specify initial delay before marquee starts to scroll on page (2000=2 seconds)
+var marqueespeed=4 //Specify marquee scroll speed (larger is faster 1-10)
+var pauseit=0 //Pause marquee onMousever (0=no. 1=yes)?
+
+////NO NEED TO EDIT BELOW THIS LINE////////////
+
+var copyspeed=marqueespeed
+var pausespeed=(pauseit==0)? copyspeed: 0
+var actualheight=''
+
+function scrollmarquee(){
+if (parseInt(cross_marquee.style.top)>(actualheight*(-1)+8))
+cross_marquee.style.top=parseInt(cross_marquee.style.top)-copyspeed+"px"
+else
+cross_marquee.style.top=parseInt(marqueeheight)+8+"px"
+}
+
+function initializemarquee(){
+cross_marquee=document.getElementById("vmarquee")
+cross_marquee.style.top=0
+marqueeheight=document.getElementById("marqueecontainer").offsetHeight
+actualheight=cross_marquee.offsetHeight
+if (window.opera || navigator.userAgent.indexOf("Netscape/7")!=-1){ //if Opera or Netscape 7x, add scrollbars to scroll and exit
+cross_marquee.style.height=marqueeheight+"px"
+cross_marquee.style.overflow="scroll"
+return
+}
+setTimeout('lefttime=setInterval("scrollmarquee()",30)', delayb4scroll)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", initializemarquee, false)
+else if (window.attachEvent)
+window.attachEvent("onload", initializemarquee)
+else if (document.getElementById)
+window.onload=initializemarquee
+
+
+</script>
+
+
+</head>
+<body style="background-color:000000;">
+
+<div id="marqueecontainer" onMouseover="copyspeed=pausespeed" onMouseout="copyspeed=marqueespeed">
+<div id="vmarquee" style="position: absolute; width: 98%;">
+
+<!--YOUR SCROLL CONTENT HERE-->
+<p>
+
+<center><img src="79.jpg" height="100%;" width="100%;">
+<p style="font-size: 700%;font-family:Goudy Old Style"><font color="CCFFFF">
+D</font><font color="FFFFFF">illon</font> <font color="CCFFFF">C</font><font color="FFFFFF">lark-<font color="CCFFFF">O</font><font color="FFFFFF">den</font>
+<br><br><font color="FF0000">J</font><font color="FFFFFF">imi</font> <font color="FF0000">A</font><font color="FFFFFF">guirre</font>
+<br><br><font color="9200A6">D</font><font color="FFFFFF">ominika</font> <font color="9200A6">W</font><font color="FFFFFF">ilk</font>
+<br><br><font color="64D225">B</font><font color="FFFFFF">randon</font> <font color="64D225">C</font><font color="FFFFFF">affie</font>
+<br><br><font color="F03671">U</font><font color="FFFFFF">lkar</font> <font color="F03671">A</font><font color="FFFFFF">lakbarova</p>
+
+<!--YOUR SCROLL CONTENT HERE-->
+
+</div>
+</div>
+<audio id="audio34" loop autoplay>
+  <source src="champ.mp3" type="audio/mpeg">	
+</audio>
+
+
+</body>
+</html>

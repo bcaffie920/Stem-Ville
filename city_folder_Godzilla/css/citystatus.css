@@ -1,0 +1,71 @@
+#citystatus {
+	height: 20px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 150px;
+}
+
+#citystatus .funds,
+#citystatus .pop,
+#citystatus .rci {
+	position: absolute;
+	background: red;
+	height: 20px;
+}
+
+#citystatus .funds {
+	left: 5px;
+	bottom: 5px;
+	width: 83px;
+	height: 23px;
+	line-height: 23px;
+	vertical-align: middle;
+	padding: 0 0 0 15px;
+	background: url(../img/moneybg.png);
+	border: 1px solid #716d6d;
+	overflow: hidden;
+}
+
+#citystatus .pop {
+	left: 5px;
+	bottom: 30px;
+	width: 83px;
+	height: 23px;
+	line-height: 23px;
+	vertical-align: middle;
+	padding: 0 0 0 15px;
+	background: url(../img/popbg.png);
+	border: 1px solid #716d6d;
+	overflow: hidden;
+}
+
+#citystatus .rci {
+	right: 10px;
+	bottom: 15px;
+	width: 30px;
+	height: 32px;
+	background: black url(../img/rcibg.png) no-repeat;
+}
+
+#citystatus .rci div {
+	width: 5px;
+	position: absolute;
+	bottom: 10px;
+	margin: 0 2px 0 2px;
+}
+
+#citystatus .r {
+	background: red;
+	left: 0px;
+}
+
+#citystatus .c {
+	background: white;
+	left: 10px;
+}
+
+#citystatus .i {
+	background: blue;
+	left: 20px;
+}

@@ -1,0 +1,538 @@
+
+#cityview {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	-apple-dashboard-region:dashboard-region(control rectangle 0px 0px 0px 0px);
+}
+
+#cityview td {
+	width: 16px;
+	height: 16px;
+	border-collapse: collapse;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+}
+
+#cityview td img {
+	display: block;
+	position: relative;
+}
+
+#cityview .land {
+	background: url(../img/land.gif?a=1);
+}
+
+#cityview .fire {
+	background: yellow;
+}
+
+#cityview .road {
+	background: url(../img/tiles/road_v.png);
+}
+
+#cityview .roadpower {
+	background: url(../img/tiles/road_power_v.png);
+}
+
+/**
+ * Residential
+ */
+#cityview .residential {
+	background: url(../img/tiles/residential.png) no-repeat 50% 50%;
+}
+
+/**
+ * Residential building versions
+ */
+#cityview .smallhouse {
+	background: url(../img/tiles/smallhouse_1.png) no-repeat;
+}
+
+#cityview .resbuilding.v0p16 {
+	background: url(../img/tiles/resbuilding_1.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v0p24 {
+	background: url(../img/tiles/resbuilding_2.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v0p32 {
+	background: url(../img/tiles/resbuilding_3.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v0p40 {
+	background: url(../img/tiles/resbuilding_4.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v1p16 {
+	background: url(../img/tiles/resbuilding_5.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v1p24 {
+	background: url(../img/tiles/resbuilding_6.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v1p32 {
+	background: url(../img/tiles/resbuilding_7.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v1p40 {
+	background: url(../img/tiles/resbuilding_8.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v2p16 {
+	background: url(../img/tiles/resbuilding_9.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v2p24 {
+	background: url(../img/tiles/resbuilding_10.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v2p32 {
+	background: url(../img/tiles/resbuilding_11.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v2p40 {
+	background: url(../img/tiles/resbuilding_12.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v3p16 {
+	background: url(../img/tiles/resbuilding_13.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v3p24 {
+	background: url(../img/tiles/resbuilding_14.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v3p32 {
+	background: url(../img/tiles/resbuilding_15.png) no-repeat 50% 50%;
+}
+
+#cityview .resbuilding.v3p40 {
+	background: url(../img/tiles/resbuilding_16.png) no-repeat 50% 50%;
+}
+
+/**
+ * Commercial
+ */
+#cityview .commercial {
+	background: url(../img/tiles/commercial.png) no-repeat 50% 50%;
+}
+
+/**
+ * Commercial building versions
+ */
+#cityview .combuilding.v0p1 {
+	background: url(../img/tiles/combuilding_1.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v0p2 {
+	background: url(../img/tiles/combuilding_2.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v0p3 {
+	background: url(../img/tiles/combuilding_3.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v0p4 {
+	background: url(../img/tiles/combuilding_4.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v0p5 {
+	background: url(../img/tiles/combuilding_5.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v1p1 {
+	background: url(../img/tiles/combuilding_6.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v1p2 {
+	background: url(../img/tiles/combuilding_7.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v1p3 {
+	background: url(../img/tiles/combuilding_8.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v1p4 {
+	background: url(../img/tiles/combuilding_9.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v1p5 {
+	background: url(../img/tiles/combuilding_10.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v2p1 {
+	background: url(../img/tiles/combuilding_11.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v2p2 {
+	background: url(../img/tiles/combuilding_12.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v2p3 {
+	background: url(../img/tiles/combuilding_13.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v2p4 {
+	background: url(../img/tiles/combuilding_14.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v2p5 {
+	background: url(../img/tiles/combuilding_15.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v3p1 {
+	background: url(../img/tiles/combuilding_16.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v3p2 {
+	background: url(../img/tiles/combuilding_17.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v3p3 {
+	background: url(../img/tiles/combuilding_18.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v3p4 {
+	background: url(../img/tiles/combuilding_19.png) no-repeat 50% 50%;
+}
+
+#cityview .combuilding.v3p5 {
+	background: url(../img/tiles/combuilding_20.png) no-repeat 50% 50%;
+}
+
+/**
+ * Industrial
+ */
+#cityview .industrial {
+	background: url(../img/tiles/industrial.png) no-repeat 50% 50%;
+}
+
+/**
+ * Industrial building versions
+ */
+#cityview .indbuilding.v0p1.nopower-1-1 {
+	background-image: url(../img/tiles/indbuilding_1.png);
+}
+
+#cityview .indbuilding.v0p1 {
+	background: url(../img/tiles/indbuilding_1_powered.gif) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v0p2 {
+	background: url(../img/tiles/indbuilding_2.png) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v0p3.nopower1-1 {
+	background-image: url(../img/tiles/indbuilding_3.png);
+}
+
+#cityview .indbuilding.v0p3.nopower10 {
+	background: url(../img/tiles/indbuilding_3.png);
+}
+
+#cityview .indbuilding.v0p3 {
+	background: url(../img/tiles/indbuilding_3_powered.gif) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v0p4.nopower0-1 {
+	background-image: url(../img/tiles/indbuilding_4.png);
+}
+
+#cityview .indbuilding.v0p4.nopower1-1 {
+	background: url(../img/tiles/indbuilding_4.png);
+}
+
+#cityview .indbuilding.v0p4 {
+	background: url(../img/tiles/indbuilding_4_powered.gif) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v1p1 {
+	background: url(../img/tiles/indbuilding_5.png) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v1p2 {
+	background: url(../img/tiles/indbuilding_6.png) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v1p3.nopower0-1 {
+	background-image: url(../img/tiles/indbuilding_7.png);
+}
+
+#cityview .indbuilding.v1p3.nopower1-1 {
+	background-image: url(../img/tiles/indbuilding_7.png);
+}
+
+#cityview .indbuilding.v1p3 {
+	background: url(../img/tiles/indbuilding_7_powered.gif) no-repeat 50% 50%;
+}
+
+#cityview .indbuilding.v1p4.nopower1-1 {
+	background-image: url(../img/tiles/indbuilding_8.png);
+}
+
+#cityview .indbuilding.v1p4.nopower10 {
+	background-image: url(../img/tiles/indbuilding_8.png);
+}
+
+#cityview .indbuilding.v1p4 {
+	background: url(../img/tiles/indbuilding_8_powered.gif) no-repeat 50% 50%;
+}
+
+/**
+ * Other
+ */
+#cityview .coalpower {
+	background: url(../img/tiles/coalpower_powered.gif) no-repeat -16px -16px;
+}
+
+#cityview .nuclearpower {
+	background: url(../img/tiles/nuclearpower.png) no-repeat -16px -16px;
+}
+
+#cityview .firestation {
+	background: url(../img/tiles/firestation.png) no-repeat 50% 50%;
+}
+
+#cityview .policestation {
+	background: url(../img/tiles/policestation.png) no-repeat 50% 50%;
+}
+
+#cityview .rubble {
+	background: brown;
+}
+
+#cityview .powerline {
+	background: url(../img/tiles/wire_h.png);
+}
+
+/**
+ * tile offsets for 3x3 tiles 
+ */
+.o31x1 {
+	background-position: 100% 100% !important;
+}
+
+.o3-1x-1 {
+	background-position: 0% 0% !important;
+}
+
+.o3-1x1 {
+	background-position: 0% 100% !important;
+}
+
+.o31x-1 {
+	background-position: 100% 0% !important;
+}
+
+.o30x1 {
+	background-position: 50% 100% !important;
+}
+
+.o30x-1 {
+	background-position: 50% 0% !important;
+}
+
+.o31x0 {
+	background-position: 100% 50% !important;
+}
+
+.o3-1x0 {
+	background-position: 0% 50% !important;
+}
+
+/**
+ * tile offsets for 4x4 tiles 
+ */
+.o41x1 {
+	background-position: -32px -32px !important;
+}
+
+.o4-1x-1 {
+	background-position: 0% 0% !important;
+}
+
+.o4-1x1 {
+	background-position: 0% -32px !important;
+}
+
+.o41x-1 {
+	background-position: -32px 0% !important;
+}
+
+.o40x1 {
+	background-position: -16px -32px !important;
+}
+
+.o40x-1 {
+	background-position: -16px 0% !important;
+}
+
+.o41x0 {
+	background-position: -32px -16px !important;
+}
+
+.o4-1x0 {
+	background-position: 0% -16px !important;
+}
+
+.o42x-1 {
+	background-position: 100% 0% !important;
+}
+
+.o42x0 {
+	background-position: 100% -16px !important;
+}
+
+.o42x1 {
+	background-position: 100% -32px !important;
+}
+
+.o42x2 {
+	background-position: 100% 100% !important;
+}
+
+.o4-1x2 {
+	background-position: 0% 100% !important;
+}
+
+.o40x2 {
+	background-position: -16px 100% !important;
+}
+
+.o41x2 {
+	background-position: -32px 100% !important;
+}
+
+/**
+ * Power state related
+ */
+#cityview .residential.nopower00,
+#cityview .resbuilding.nopower00,
+#cityview .commercial.nopower00,
+#cityview .combuilding.nopower00,
+#cityview .industrial.nopower00,
+#cityview .indbuilding.nopower00,
+#cityview .firestation.nopower00,
+#cityview .policestation.nopower00 {
+	background-image: url(../img/tiles/nopower.png);
+}
+
+/**
+ * Road connections
+ */
+#cityview .road.up,
+#cityview .road.down {
+	background-image: url(../img/tiles/road_v.png);
+}
+
+#cityview .road.left,
+#cityview .road.right {
+	background-image: url(../img/tiles/road_h.png);
+}
+
+#cityview .road.up.left {
+	background-image: url(../img/tiles/road_upleft.png);
+}
+
+#cityview .road.up.right {
+	background-image: url(../img/tiles/road_upright.png);
+}
+
+#cityview .road.down.right {
+	background-image: url(../img/tiles/road_downright.png);
+}
+
+#cityview .road.down.left {
+	background-image: url(../img/tiles/road_downleft.png);
+}
+
+#cityview .road.up.right.down.left {
+	background-image: url(../img/tiles/road_crossing.png);
+}
+
+#cityview .road.up.down.left {
+	background-image: url(../img/tiles/road_v_crossleft.png);
+}
+
+#cityview .road.up.down.right {
+	background-image: url(../img/tiles/road_v_crossright.png);
+}
+
+#cityview .road.left.right.down {
+	background-image: url(../img/tiles/road_h_crossdown.png);
+}
+
+#cityview .road.left.right.up {
+	background-image: url(../img/tiles/road_h_crossup.png);
+}
+
+/**
+ * Road with wire connections
+ */
+#cityview .roadpower.right,
+#cityview .roadpower.left {
+	background-image: url(../img/tiles/road_power_h.png);
+}
+
+#cityview .roadpower.up,
+#cityview .roadpower.down {
+	background-image: url(../img/tiles/road_power_v.png);
+}
+
+/**
+ * Wire connections
+ */
+#cityview .powerline.up,
+#cityview .powerline.down {
+	background-image: url(../img/tiles/wire_v.png);
+}
+
+#cityview .powerline.left,
+#cityview .powerline.right {
+	background-image: url(../img/tiles/wire_h.png);
+}
+
+#cityview .powerline.up.left {
+	background-image: url(../img/tiles/wire_upleft.png);
+}
+
+#cityview .powerline.up.right {
+	background-image: url(../img/tiles/wire_upright.png);
+}
+
+#cityview .powerline.down.right {
+	background-image: url(../img/tiles/wire_downright.png);
+}
+
+#cityview .powerline.down.left {
+	background-image: url(../img/tiles/wire_downleft.png);
+}
+
+#cityview .powerline.up.right.down.left {
+	background-image: url(../img/tiles/wire_crossing.png);
+}
+
+#cityview .powerline.up.down.left {
+	background-image: url(../img/tiles/wire_v_crossleft.png);
+}
+
+#cityview .powerline.up.down.right {
+	background-image: url(../img/tiles/wire_v_crossright.png);
+}
+
+#cityview .powerline.left.right.down {
+	background-image: url(../img/tiles/wire_h_crossdown.png);
+}
+
+#cityview .powerline.left.right.up {
+	background-image: url(../img/tiles/wire_h_crossup.png);
+}

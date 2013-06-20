@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+<script>
+function displayResult()
+{
+document.body.style.backgroundColor="#000000";
+document.body.style.backgroundImage="url('bg1.png')";
+document.body.style.backgroundSize="100%";
+}
+</script>
+    <title>Adventure Path</title>
+	<style type="text/css">
+body {
+	padding: 0;
+	margin: 0;
+	background: url(img/Stemville.png) no-repeat center top;
+	background-size:825px 600px;
+	/*font-family: Times;
+	font-size: 15px;*/
+	//background: #000000;
+}	
+
+#log {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+#graph,
+#city,
+#menu
+#loading 
+{
+	margin: 0 auto 0 auto 0 auto;
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 590px;
+	height: 535px;
+}
+
+#city {
+	background: url(img/Metal.png) no-repeat center top;
+	border: black 10px solid;
+	position: absolute;
+	//background: url(img/stars.png);
+	// background: #000000;
+	//margin: 100px 400px 100px;
+}
+
+#loading img {
+	display: block;
+	width: 100px;
+	height: 100px;
+	margin: 70px auto;
+}
+
+#loading p {
+	padding: 10px;
+	position: absolute;
+	top: 150px;
+	left: 15px;
+	width: 200px;
+}
+
+#loading {
+	background: url(img/menubg.png);
+}
+
+#menu {
+	margin: 0 auto 0 auto;
+	background: transparent no-repeat center top;
+	//background: url(img/BeautifulCali.png) no-repeat center top;
+	padding-top: 100px;
+	height: 230px;
+}
+
+
+#new, #save, #load, #exit, #return, #help, #notlucky, #index {
+	color: black;
+	text-decoration: none;
+	font-size: 20px;
+	text-align: center;
+	align: center;
+	display: block;
+	width: 130px;
+	height: 50px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin: 0 auto 10px auto;
+	background: url(img/menubuttonbg.png) no-repeat;
+	cursor: pointer;
+	-apple-dashboard-region:dashboard-region(control rectangle 0px 0px 0px 0px);
+}
+
+#return, #save, #load {
+	display: none;
+}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/citymenu.css" />
+	<link rel="stylesheet" type="text/css" href="css/citystatus.css" />	
+	<link rel="stylesheet" type="text/css" href="css/cityview.css" />		
+	<link rel="stylesheet" type="text/css" href="css/graphview.css" />
+	<script type="text/javascript">
+/*if(window.opera) {
+	var console = { };
+	if(opera.postError)
+		console.log = opera.postError;
+}
+else {
+	window.opera = { };
+	window.opera.postError = function() {};
+}
+
+if(!console || !console.log) {
+	var console = {
+		log: function(nothing) { }
+	};
+}*/
+var app = {};
+
+app.Keys = {
+	DOWN: 40,
+	UP: 38,
+	RIGHT: 39,
+	LEFT: 37
+};
+
+/**
+ * Class extending mechanism
+ * @param {Object} child child "class"
+ * @param {Object} parent parent "class"
+ */
+function extend(child, parent) {
+	var f = function() {};
+	f.prototype = parent.prototype;
+	child.prototype = new f();
+	child.prototype.constructor = child;
+	child.superclass = parent.prototype;
+}
+
+/**
+ * Clamp value between min/max
+ * @param {Number} val
+ * @param {Number} min minimum value (inclusive)
+ * @param {Number} max maximum value (inclusive)
+ * @return {Number}
+ */
+Math.clamp = function(val, min, max) {
+	if(val < min) {
+		return min;
+	}
+	
+	if(val > max) {
+		return max;
+	}
+	
+	return val;
+};
+
+Math.randMax = function(max) {
+	return Math.floor(Math.random() * max);
+};
+
+</script>
+	<script type="text/javascript" src="js/timing.js"></script>
+	<script type="text/javascript" src="pixelfont.js"></script>
+	<script type="text/javascript" src="js/json2.js"></script>	
+	<script type="text/javascript" src="js/city.js"></script>
+	<script type="text/javascript" src="js/city/sim.js"></script>
+	<script type="text/javascript" src="js/city/state.js"></script>
+	<script type="text/javascript" src="js/city/engine.js"></script>
+	<script type="text/javascript" src="js/city/zone.js"></script>
+	<script type="text/javascript" src="js/city/buildings.js"></script>
+	<script type="text/javascript" src="js/city/ui.js"></script>
+	<script type="text/javascript">
+var lolImage;
+var rend =null;
+var layer2_ctx;
+var ctx;
+
+app.WidgetCity = function() {	
+};
+
+app.WidgetCity.prototype = {
+	_state: null,
+	
+	_states: { },
+	
+	getActiveState: function() {
+		return this._state;	
+	},
+	
+	changeState: function(state) {
+		this._state = this._states[state];
+		if (this._oldState) {
+			document.getElementById(this._oldState).style.display = 'none';
+		}
+		document.getElementById(state).style.display = 'block';
+		this._oldState = state;
+	},
+	
+	createCityState: function() {
+		var canvas = document.getElementById('canvas');
+		this._canvas = canvas;
+		ctx = canvas.getContext('2d');
+		//var layer2 = document.getElementById('layer2');
+		//layer2_ctx = layer2.getContext('2d');
+
+		//var gctx = canvas.getContext('opera-2dgame');
+		//var gctx = null;
+				
+		var info = document.createElement('div');
+		info.className = 'info';
+		document.getElementById('city').appendChild(info);
+		
+		var f = new city.MapFactory();
+		var map = f.createEmptyMap();
+
+		//14,16
+		var r = new city.engine.CityViewRenderer(map, 30, 30);
+		var inputManager = new city.engine.InputManager(this);
+		inputManager.registerEventHandlers(window, r.getElement());
+
+		//var mycity = new city.City('New City', 'Mayor Tutorial', 2000, map, info);
+		this._states.city = new city.state.CityState(this, null, map, r, info);
+		//this._states.graph = new city.state.GraphState(this, mycity, map, new city.engine.GraphRenderer(ctx, 100, 100));
+		
+		var menu = new city.ui.CityMenu(this._states.city);
+		menu.create();
+
+		var status = new city.ui.CityStatus(this._states.city);
+		status.create();
+		
+		this._states.city.addUiUpdateListener(status);
+
+	},
+	
+	createMenuState: function() {
+		this._states.menu = new city.state.MenuState(this, this._states.city._city);
+	},
+	
+	run: function() {
+		document.getElementById('loading').style.display='block';
+		this.createCityState();
+		this.createMenuState();
+		var self = this;		
+		/*var logg = document.getElementById('log');
+		var ticks = 0;
+		var t = new FrameTimer();
+		var then = new Date();
+		var lastFps = 0;
+		var nowFps = 0;*/
+
+		
+
+		document.getElementById('loading').style.display='none';
+		this.changeState('menu');		
+		/*var datas = [];
+		for(var i = 0; i < 50; i++) {
+			var start = new Date();
+			for(var j = 0; j < 5; j++) 
+				mycity._desirability.doPopulationDensityScan();
+			datas.push(new Date() - start);
+		}
+		document.write(datas.join('<br>'));
+		return;*/
+		var thread = setInterval(function(){
+			//try {
+				self._state.work();
+				/*ticks++;
+				t.tick();
+				nowFps = t.calculateFrameRate();
+				if(nowFps != lastFps) 
+					logg.innerHTML = nowFps;
+					
+				lastFps = nowFps;*/
+				//logg.innerHTML = ticks + ' ' + lastFps;
+				/*if(ticks > 1000) {
+					clearInterval(thread);
+					//opera.postError(new Date() - then);
+					document.write(new Date() - then);
+				}*/
+			//}
+			//catch(exception) {
+			//	clearInterval(thread);
+			//	throw exception;
+			//}
+		}, 1);		
+	}
+};
+	</script>
+
+
+
+<script>
+	var eTime; var zI; 
+var cTime; 
+var exit;
+
+	var timer; var xpos = 0; 
+var ypos = 0;  
+var frameSize = 96;
+	
+var index = 0; 
+var action; 
+var direction; 
+var LBoundary = false;
+
+	var RBoundary = false; 
+var UBoundary = false; 
+var BBoundary = false;
+
+	var flashText;
+ var width = 96,
+    height = 96,
+    ship_x = (width / 2) - 25, ship_y = (height / 2) - 25;
+	
+var chaosCounter; 
+var audio = document.getElementById("audio");	
+
+	var audio2 = document.getElementById("audio2"); 
+
+	var godzilla = new Image();
+godzilla.src = 'bahamut.png';
+
+
+
+
+	function zillaText()
+{
+
+		
+ctx.fillStyle="#5CADE9"; 
+ctx.lineStyle="#5CADE9";
+ctx.font="bold 28pt sans-serif";
+ctx.shadowOffsetX=4;
+ctx.shadowOffsetY=4;
+ctx.shadowBlur=8;
+ctx.fillText("GODZILLA!!!", 0, 220);
+ctx.strokeText("GODZILLA!!!", 0, 220);
+
+}
+
+
+function releaseZilla(a)
+{	
+	zI = 1;
+	if(index=2)
+		document.getElementById('audio3').play();	
+	this.action = a;
+	chaosCounter = setInterval(animateZilla, 10000/30);
+	setTimeout(function(){exit=true;}, 25000);	
+	setTimeout(function(){zillaExit();}, 35000);
+}
+
+function animateZilla()
+{ 	
+	//setTimeout(function(){document.getElementById('audio3').play()}, 1000);
+	setTimeout(function(){document.getElementById('audio4').play()}, 4000);
+	//setTimeout(function(){document.getElementById('audio5').play()}, 2200);	
+	//setTimeout(function(){document.getElementById('audio6').play()}, 3200);
+	flashText = setTimeout(function(){zillaText();}, 500);
+	setFrame();
+	clearScreen();
+	drawZilla();
+	moveZilla();
+	index++;
+			
+}
+
+function zillaExit()
+{
+	zI = 0;
+	
+	exit = false;
+	clearInterval(chaosCounter);
+	clearTimeout(flashText);
+	ship_x = (width / 2) - 25; 
+	ship_y = (height / 2) - 25;
+	xpos = 0;
+	ypos = 0;
+	clearScreen();
+}
+
+
+function moveZilla()
+{
+
+	if (this.action == 2 || this.action == 1)
+	{
+		if (!exit)
+		{
+			if (ship_x >= 400)
+				LBoundary = true;
+			else
+				LBoundary = false;	
+
+			if (ship_x <= 0)
+				RBoundary = true;
+			else
+				RBoundary = false;
+		}
+
+		ship_x += frameSize / direction;
+	}
+
+	if (this.action == 0 || this.action == 3)
+	{
+		if (!exit)
+		{
+	
+			if (ship_y >= 400)
+				BBoundary = true;
+			else
+				BBoundary = false;	
+
+			if (ship_y <= 0)
+				UBoundary = true;
+			else
+				UBoundary = false;
+		}
+
+		ship_y += frameSize / direction;
+	}
+
+
+}
+
+function setFrame()
+{
+	
+	var source = 2;
+	if (index >= 4)
+	{
+		index = 0;
+	}
+
+if( LBoundary )
+	this.action = 1;
+if ( RBoundary )
+	this.action = 2;
+if (BBoundary)
+	{
+	this.action = 3;
+	document.getElementById('audio2').play();
+	}
+if (UBoundary)
+	this.action = 0;
+
+	switch(this.action)
+	{
+		case 0:
+		xpos = index * 96;
+		ypos = 0;
+		direction = 8;
+		break;
+
+		case 1:
+		xpos = index * 96;
+		ypos =  frameSize;
+		direction = -8;
+		break;
+
+		case 2:
+		xpos = index * 96;
+		ypos = frameSize * 2;
+		direction = 8;
+		break;
+	
+		case 3:
+		xpos = index * 96;
+		ypos = frameSize * 3;
+		direction = -8;
+		break;
+	}
+
+	
+	
+}
+
+function drawZilla()
+{
+   ctx.drawImage(godzilla, xpos, ypos, frameSize, frameSize, ship_x, ship_y, 96, 96);
+	
+}
+
+function clearScreen()
+{
+	ctx.clearRect(0, 0, 490, 490);
+}
+function playMusic(source)
+{
+switch (source)
+{
+	case 1:
+		//audio.src="Sean.05_13-12.wav";
+		audio.play();
+		document.getElementById("audio").play();
+		break;
+	case 2:
+		audio2.play();
+		//audio.src="RUUN!!, IT'S GODZILLA!!!-01.wav";
+		//document.getElementById("audio2").play();
+	break;
+}
+	
+
+}
+		
+  
+
+</script>
+
+
+
+  </head>
+<body>
+<audio id="audio1" loop autoplay>
+  <source src="World.mp3" type="audio/mpeg">	
+</audio>
+	<div id="menu" align = "center">
+		<a id="return">Go Back!</a>		
+		<a id="new" onclick="displayResult();">Create City!</a>
+		<a id="help"> How To Play</a>
+		<a id="load">Load City</a>
+		<a id="save">Save City</a>
+		<a id="exit">Exit</a>
+		<a id="notlucky">Feeling Lucky?</a>
+		<a id="index">Credits</a>				
+	</div>
+	<div id="loading">
+		<img src="img/loader.gif" alt="" />
+		<p id="note">This may take up to 30-60 seconds depending on your device. Please be patient.</p>
+	</div>
+	
+	<div id="city" style="position: relative; z-index: zI;">
+	<canvas id="canvas" width="205" height="480" style="position: relative; left: 0; top: 0; z-index: 1;">
+		//Your browser doesn't appear to support canvas	
+		
+	</canvas>
+
+
+
+	</div>
+
+	
+	<div id="graph">
+	</div>
+
+	<audio id="audio" preload="auto">
+	<source src="Sean.05_13-12.wav"/>
+	</audio>
+	<audio id="audio2" preload="auto">
+	<source src="RUUN!!, IT'S GODZILLA!!!-01.wav"/>
+	</audio>
+	<audio id="audio3" preload="auto">
+	<source src="Godzilla1954_Soundtrack_Footsteps_FX-02.wav"/>
+	</audio>
+	<audio id="audio4" preload="auto">
+	<source src="Godzilla 1954 Soundtrack- Footsteps FX-04.wav"/>
+	</audio>
+	<audio id="audio5" preload="auto">
+	<source src="Godzilla 1954 Soundtrack- Footsteps FX-04 copy.wav"/>
+	</audio>
+	<audio id="audio6" preload="auto">
+	<source src="Godzilla1954_Soundtrack_Footsteps_FX-02 copy.wav"/>
+	</audio>
+	<audio id="audio7" preload="auto">
+	<source src="Sound_Effects_Godzilla-04.wav"/>
+	</audio>
+	<audio id="audio8" preload="auto">
+	<source src="Cash.mp3"/>
+	</audio>
+
+
+
+
+
+<script>
+var game = new app.WidgetCity();
+game.run();
+
+</script>
+
+
+
+</body>
+</html>

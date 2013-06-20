@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="WidgetCity">
+	<icon>icon.png</icon>
+	<widgetname>WidgetCity</widgetname>
+   <description>Build the city of your dreams!</description>
+   <id>
+     <host>codeutopia.net/</host>
+     <name>widgetcity</name>
+     <revised>2009-04</revised>
+   </id>   
+   <width>240</width>
+   <height>266</height>
+   <author>
+    <name>Jani Hartikainen</name>
+    <link>http://codeutopia.net/</link>
+   </author>
+</widget>
